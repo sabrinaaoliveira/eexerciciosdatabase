@@ -1,0 +1,42 @@
+
+db["exercicio3"].find()
+use blog
+switched to db blog
+db.createCollection("posts")
+{ ok: 1 }
+db.posts.insertOne({
+  titulo: "Tempo de coleção de suculentas",
+  autor: "Sabrina",
+  conteudo: "Cultivo suculentas desde 2019"
+})
+{
+  acknowledged: true,
+  insertedId: ObjectId('690e631e9f0ef7404bd56de0')
+}
+db.posts.insertOne({
+  titulo: "Diferença cactos e suculentas",
+  autor: "Sabrina",
+  conteudo: "Todo cacto é uma suculenta mas nem toda suculenta é um cacto",
+  tags: ["curiosidade", "suculentas"]
+})
+{
+  acknowledged: true,
+  insertedId: ObjectId('690e635a9f0ef7404bd56de1')
+}
+db.posts.find().pretty()
+{
+  _id: ObjectId('690e6ac3f2d37c7d41ff972b'),
+  titulo: 'Tempo de coleção de suculentas',
+  autor: 'Sabrina',
+  conteudo: 'Cultivo suculentas desde 2019'
+}
+{
+  _id: ObjectId('690e6acbf2d37c7d41ff972c'),
+  titulo: 'Diferença cactos e suculentas',
+  autor: 'Sabrina',
+  conteudo: 'Todo cacto é uma suculenta mas nem toda suculenta é um cacto',
+  tags: [
+    'curiosidade',
+    'suculentas'
+  ]
+}
