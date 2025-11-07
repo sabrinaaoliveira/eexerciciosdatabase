@@ -1,0 +1,135 @@
+use local
+switched to db local
+db["exercicio"].find()
+use blog
+switched to db blog
+db.createCollection("posts")
+{ ok: 1 }
+db.posts.insertOne({
+  titulo: "Tempo de coleção de suculentas",
+  autor: "Sabrina",
+  conteudo: "Cultivo suculentas desde 2019"
+})
+{
+  acknowledged: true,
+  insertedId: ObjectId('690e6ac3f2d37c7d41ff972b')
+}
+db.posts.insertOne({
+  titulo: "Diferença cactos e suculentas",
+  autor: "Sabrina",
+  conteudo: "Todo cacto é uma suculenta mas nem toda suculenta é um cacto",
+  tags: ["curiosidade", "suculentas"]
+})
+{
+  acknowledged: true,
+  insertedId: ObjectId('690e6acbf2d37c7d41ff972c')
+}
+db.posts.find().pretty()
+{
+  _id: ObjectId('690e6ac3f2d37c7d41ff972b'),
+  titulo: 'Tempo de coleção de suculentas',
+  autor: 'Sabrina',
+  conteudo: 'Cultivo suculentas desde 2019'
+}
+{
+  _id: ObjectId('690e6acbf2d37c7d41ff972c'),
+  titulo: 'Diferença cactos e suculentas',
+  autor: 'Sabrina',
+  conteudo: 'Todo cacto é uma suculenta mas nem toda suculenta é um cacto',
+  tags: [
+    'curiosidade',
+    'suculentas'
+  ]
+}
+comentarios: [
+  { autor: "Márcia Lima", texto: "Muito bom!" },
+  { autor: "Maria de Souza", texto: "Adoro os seus vídeos" }
+]
+[
+  { autor: 'Márcia Lima', texto: 'Muito bom!' },
+  { autor: 'Maria de Souza', texto: 'Adoro os seus vídeos' }
+]
+db.posts.updateOne(
+  { titulo: "Diferença entre cactos e suculentas" },
+  {
+    $set: {
+      comentarios: [
+        { autor: "Márcia", texto: "Que legal!" },
+        { autor: "Maria", texto: "Sempre tive essa dúvida!" }
+      ]
+    }
+  }
+)
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+db.posts.updateOne(
+  { titulo: "Diferença cactos e suculentas" },
+  {
+    $set: {
+      comentarios: [
+        { autor: "João", texto: "Muito bom o conteúdo!" },
+        { autor: "Ana", texto: "Aprendi uma coisa nova hoje!" }
+      ]
+    }
+  }
+)
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.posts.find({ tags: "curiosidade" })
+{
+  _id: ObjectId('690e6acbf2d37c7d41ff972c'),
+  titulo: 'Diferença cactos e suculentas',
+  autor: 'Sabrina',
+  conteudo: 'Todo cacto é uma suculenta mas nem toda suculenta é um cacto',
+  tags: [
+    'curiosidade',
+    'suculentas'
+  ],
+  comentarios: [
+    {
+      autor: 'João',
+      texto: 'Muito bom o conteúdo!'
+    },
+    {
+      autor: 'Ana',
+      texto: 'Aprendi uma coisa nova hoje!'
+    }
+  ]
+}
+db.posts.find({ autor: "Sabrina" })
+{
+  _id: ObjectId('690e6ac3f2d37c7d41ff972b'),
+  titulo: 'Tempo de coleção de suculentas',
+  autor: 'Sabrina',
+  conteudo: 'Cultivo suculentas desde 2019'
+}
+{
+  _id: ObjectId('690e6acbf2d37c7d41ff972c'),
+  titulo: 'Diferença cactos e suculentas',
+  autor: 'Sabrina',
+  conteudo: 'Todo cacto é uma suculenta mas nem toda suculenta é um cacto',
+  tags: [
+    'curiosidade',
+    'suculentas'
+  ],
+  comentarios: [
+    {
+      autor: 'João',
+      texto: 'Muito bom o conteúdo!'
+    },
+    {
+      autor: 'Ana',
+      texto: 'Aprendi uma coisa nova hoje!'
+    }
+  ]
+}
